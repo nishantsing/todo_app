@@ -1,6 +1,10 @@
 # REST-API-Flask-Server-Beginners
 
+&nbsp;
+
 > ### API stands for Application Programming Interface. So in order to interact with application, there are some rules & regulations (protocols) need to be followed by API designers. For that some request methods are defined in API Nomenclature which define the task they are dedicated for & hence the third party users will know about request URL & it's usage.
+
+&nbsp;
 
 REST API Request Method | Dedicated Behaviour/task
 ------------ | -------------
@@ -9,6 +13,8 @@ POST | Insert resource data
 PUT | Replace resource data
 PATCH | Modify resource data
 DELETE | Delete resource data
+
+&nbsp;
 
 >> * There are only **2** HTTP methods.
 >>    * **GET** (Default)
