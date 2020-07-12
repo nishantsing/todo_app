@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"
+        integrity="sha512-M+hXwltZ3+0nFQJiVke7pqXY7VdtWW2jVG31zrml+eteTP7im25FdwtLhIBTWkaHRQyPrhO2uy8glLMHZzhFog=="
+        crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>Insert</h1>
     <hr>
     <form action="http://localhost:5000/add" method="POST">
-        id: <input type="number" name="id" min="1">
-        name: <input type="text" name="name">
-        <input type="submit" value="Submit">
+        
+        Task Name: <input type="text" name="taskname"><hr>
+        <input type="text" name="taskname"><i class="fas fa-plus"></i>
+
+        <hr><input type="submit" value="Submit">
     </form>
     <hr>
     <a href=" {{ url_for('getHome') }} ">Home</a>
