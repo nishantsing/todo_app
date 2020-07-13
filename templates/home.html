@@ -29,15 +29,20 @@
                 height: 100vh;
                 margin: 0;
             }
-            .new-task{                
+            .new-task{
                 position: absolute;
                 bottom: 0;
                 right: 0;
                 padding-right: 20px;
                 /* opacity: 20%; */
                 zoom: 400%;
-            }           
+            }
+            i{
+                position: absolute;
+                right:0;
+            }
         </style>
+
     </head>
 
     <body>
@@ -50,27 +55,18 @@
             <div class="card-body">
                 <!-- <h5 class="card-title">Special title treatment</h5> -->
                 <p class="card-text">Supporting text</p>
-                <table class="table table-borderless table-hover">
-                    <tbody>
-                        <tr>
-                            <th scope="row">➤</th>
-                            <td>entry1</td>
-                            <td>↻</td>
-                            <td>✗</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">➤</th>
-                            <td>entry2</td>
-                            <td>↻</td>
-                            <td>✗</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ul class="list-group">
+                    <li class="list-group-item disabled" aria-disabled="true">Get food<i class="far fa-trash-alt"></i></li>
+                    <li class="list-group-item">Drink water</li>
+                    <li class="list-group-item">Eat Healthy</li>
+                    <li class="list-group-item">Sleep 8 hours</li>
+                    <li class="list-group-item">Go to Market to buy veggies.</li>
+                </ul>
                 <!-- <a href="#" class="btn btn-primary">Done</a> -->
             </div>
         </div>
         <div class="new-task">
-            <p> <a href=" {{ url_for('getAdd') }} "><i class="fas fa-tasks"></i></a></p>
+            <p> <a href="/add"><i class="fas fa-tasks"></i></a></p>
         </div>
         </div>
     </body>

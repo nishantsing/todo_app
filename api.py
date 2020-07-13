@@ -1,3 +1,4 @@
+from firebase import firebase
 import flask
 from flask import request, jsonify, render_template, redirect, url_for
 import pymongo
@@ -5,6 +6,10 @@ import pymongo
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017')
 db = client['tododb']
 collection = db['mycollection']
+
+
+firebase = firebase.FirebaseApplication("https://todo-8a912.firebaseio.com/", None)
+
 
 
 app = flask.Flask(__name__)
@@ -30,6 +35,8 @@ def getAdd():
         name = request.form.get('name', type=str)
 
         data = [{'id': id, 'name': name}]
+        result=firebase.post('/todo-8a912/Task', data)
+        print(result)
 
         if id is not None and name is not None:
             if (len(collection.insert(data)) > 0):
