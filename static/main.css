@@ -14,8 +14,8 @@
 }
 
 body{
-    /*background-image: url("edu.jpg");*/
-    background-size: 2000px 2000px;
+    background-image: url("edu.jpg");
+    background-size: 200px 200px;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

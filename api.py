@@ -16,7 +16,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 def displayAll():
-    return collection.find({}, {'_id': 0})
+    return firebase.get('/tasks',None)
 
 @app.route('/', methods=['GET'])
 def getHome():
@@ -26,20 +26,22 @@ def getHome():
 @app.route('/display-all', methods=['GET'])
 def getDisplayAll():
     records = displayAll()
-    return jsonify(list(records))
+    print(records)
+    return jsonify(records)
 
 @app.route('/add',methods=['POST','GET'])
 def getAdd():
     if request.method == 'POST':
-        id = request.form.get('id', type=int)
-        name = request.form.get('name', type=str)
+        taskname = request.form.get('taskname', type=str)
+        entryname = request.form.get('entryname', type=str)
 
-        data = [{'id': id, 'name': name}]
-        result=firebase.post('/todo-8a912/Task', data)
-        print(result)
+        data = [{'taskname': taskname, 'entryname': entryname}]
+        # print(data)
+        result=firebase.post('/tasks', data)
+        print(jsonify(result))
 
-        if id is not None and name is not None:
-            if (len(collection.insert(data)) > 0):
+        if taskname is not None and entryname is not None:
+            if (result['name'] is not None):
                 return redirect('http://127.0.0.1:5000/display-all')
             else:
                 return "Error - Not inserted"

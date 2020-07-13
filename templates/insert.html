@@ -18,13 +18,32 @@
 	<h1 class="htitle">Task Entries</h1>
 	<div class="jumbotron form-section">		
 	    <form action="http://localhost:5000/add" method="POST">
-	    	<input type="text" name="taskname" placeholder="Task Name" autofocus><hr>
-	        <input type="text" name="taskname" placeholder="Entry">&nbsp<i class="fas fa-plus"></i>
-
+			<input type="text" name="taskname" placeholder="Task Name" autofocus><hr>
+			<div id="parent">
+				<input type="text" name="entryname" placeholder="Entry" id="enter"><br>
+			</div>	        
+			<a href="#" id="plus"><i class="fas fa-plus"></i></a>		
 	        <hr><input type="submit" value="Submit" class="btn btn-outline-info">		
 	    </form>	
 	</div>	
     <hr style="background-color: whitesmoke;">
     <a href="/" class="btn btn-link">🏠</a>
+
+	<script>
+		var arr=[]
+		
+		document.getElementById('plus').addEventListener('click',(event)=>{
+			var parent = document.getElementById('parent')
+			// var enter = document.getElementById('enter').value
+			var input =	document.createElement('input')
+			input.type = 'text'
+			var text = parent.innerText
+			arr.push(text)
+			console.log(arr);
+			parent.appendChild(input);
+		})
+	</script>
+
 </body>
+
 </html>
