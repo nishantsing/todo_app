@@ -2,41 +2,67 @@
 
 {% block head %}
     <title>Insert</title>
-    
-	<link rel="stylesheet" href="/static/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<link rel="stylesheet" href="/static/main.css">	
 {% endblock %}
 
 
 
 {% block body %}
-	<h1 class="htitle">Task Entries</h1>
-	<div class="jumbotron form-section">		
-	    <form action="http://localhost:5000/add" method="GET">
-			<input type="text" name="taskname" placeholder="Task Name" autofocus><hr>
-			<input type="text" name="entryname" placeholder="Entry" id="enter">&nbsp<a href="#" id="plus"><i class="fas fa-plus"></i></a><br>
-			<ul class="list-group" id="parent"></ul>			
-	        <hr><input type="submit" value="Submit" class="btn btn-outline-info">		
-	    </form>	
-	</div>	
-    <hr style="background-color: whitesmoke;">
-    <a href="/" class="btn btn-link">🏠</a>
+	<div ng-app="myApp" ng-controller="myController">
+		<h1 class="htitle">Task Entries</h1>
+		<div class="jumbotron form-section">		
+			<form action="http://localhost:5000/add" method="GET">
+				<input type="text" name="taskname" placeholder="Task Name" autofocus><hr>
+				<input type="text" placeholder="Entry" id="enter" ng-model = "data">&nbsp<button class="btn" type="button" ng-click="addRow()"><i class="fas fa-plus"></i></button><br>
+				<table class="table table-sm"> 				
+					<tr ng-repeat="entry in entries">
+						<td><label>{{ '{{$index + 1}}' }}</label></td>	
+						<td><label>{{ '{{entry.data}}' }}</label></td>				
+						<td><button ng-click="deleteRecord($index)" class="btn">❌</button></td>
+					</tr>
+				</table>
+				<hr><input type="submit" value="Submit" class="btn btn-outline-info">		
+			</form>	
+		</div>	
+		<hr style="background-color: whitesmoke;">
+		<a href="/" class="btn btn-link">🏠</a>
+	</div>
 
 	<script>
-		var arr=[]
-		
-		document.getElementById('plus').addEventListener('click',(event)=>{
-			var input = document.getElementById('enter').value
-			var parent = document.getElementById('parent')
-			// var enter = document.getElementById('enter').value
-			var li =	document.createElement('li')
-			li.innerHTML = input		
-			li.classList = 'list-group-item'	 
-			arr.push(input)
-			console.log(arr);
-			parent.appendChild(li);
-			document.getElementById('enter').value = ''
-			// input = ''
-		})
-	</script>
+		var app = angular.module('myApp', []);
+		app.controller('myController', function ($scope) {			
+			$scope.entries = [];
+			var arr=[]
 
+			$scope.deleteRecord = function (index) {
+				var arrMovie = [];
+				arrMovie = $scope.entries
+				if (index !== -1) {
+					arrMovie.splice(index, 1);
+					arr.splice(index,1);
+				}              				
+				$scope.entries = arrMovie;     
+				console.log($scope.entries)
+				console.log(arr)       
+			};					
+
+			$scope.addRow = function () {	
+				if(document.getElementById('enter').value !== ''){
+					var entry = [];
+
+					var input = document.getElementById('enter').value
+					entry.data = input;
+					$scope.entries.push(entry);
+					console.log($scope.entries)	                
+					
+					arr.push(input)
+					console.log(arr);
+					document.getElementById('enter').value = null	            
+				}               
+        	};				
+			
+		});
+	</script>
+	
 {% endblock %}
