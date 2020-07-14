@@ -16,7 +16,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 def displayAll():
-    return firebase.get('/tasks',None)
+    return firebase.get('/collection',None)
 
 @app.route('/', methods=['GET'])
 def getHome():
@@ -34,10 +34,13 @@ def getAdd():
     if request.method == 'POST':
         taskname = request.form.get('taskname', type=str)
         entryname = request.form.get('entryname', type=str)
+        user = 'user1'
 
-        data = [{'taskname': taskname, 'entryname': entryname}]
+        data = [{'entryname': entryname}]
         # print(data)
-        result=firebase.post('/tasks', data)
+        # result=firebase.post('/collection'+'/'+user+'/'+taskname, data)
+        # result = firebase.put('/collection/user1/cricket/-MCCbNQg5MSrq8e3oDUx/0', 'entryname', 'get all')
+        result=firebase.post('/collection/user1/cricket', data)
         print(jsonify(result))
 
         if taskname is not None and entryname is not None:
