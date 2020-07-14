@@ -31,15 +31,15 @@ def getDisplayAll():
 
 @app.route('/add',methods=['POST','GET'])
 def getAdd():
-    if request.method == 'POST':
+    if request.method == 'GET':
         taskname = request.form.get('taskname', type=str)
         entryname = request.form.get('entryname', type=str)
-        user = 'user1'
+        # user = 'user1'
 
         data = [{'entryname': entryname}]
-        # print(data)
+        print(data)
         # result=firebase.post('/collection'+'/'+user+'/'+taskname, data)
-        # result = firebase.put('/collection/user1/cricket/-MCCbNQg5MSrq8e3oDUx/0', 'entryname', 'get all')
+        # result = firebase.put('/collection/user1/cricket/-MCCbNQg5MSrq8e3oDUx', 'entryname', 'get bhola')
         result=firebase.post('/collection/user1/cricket', data)
         print(jsonify(result))
 

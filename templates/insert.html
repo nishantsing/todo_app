@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'layout.html' %}
+
+{% block head %}
     <title>Insert</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js" integrity="sha512-M+hXwltZ3+0nFQJiVke7pqXY7VdtWW2jVG31zrml+eteTP7im25FdwtLhIBTWkaHRQyPrhO2uy8glLMHZzhFog==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
 	<link rel="stylesheet" href="/static/main.css">
+{% endblock %}
 
-</head>
 
 
-<body>
+{% block body %}
 	<h1 class="htitle">Task Entries</h1>
 	<div class="jumbotron form-section">		
-	    <form action="http://localhost:5000/add" method="POST">
+	    <form action="http://localhost:5000/add" method="GET">
 			<input type="text" name="taskname" placeholder="Task Name" autofocus><hr>
-			<div id="parent">
-				<input type="text" name="entryname" placeholder="Entry" id="enter"><br>
-			</div>	        
-			<a href="#" id="plus"><i class="fas fa-plus"></i></a>		
+			<input type="text" name="entryname" placeholder="Entry" id="enter">&nbsp<a href="#" id="plus"><i class="fas fa-plus"></i></a><br>
+			<ul class="list-group" id="parent"></ul>			
 	        <hr><input type="submit" value="Submit" class="btn btn-outline-info">		
 	    </form>	
 	</div>	
@@ -33,17 +25,18 @@
 		var arr=[]
 		
 		document.getElementById('plus').addEventListener('click',(event)=>{
+			var input = document.getElementById('enter').value
 			var parent = document.getElementById('parent')
 			// var enter = document.getElementById('enter').value
-			var input =	document.createElement('input')
-			input.type = 'text'
-			var text = parent.innerText
-			arr.push(text)
+			var li =	document.createElement('li')
+			li.innerHTML = input		
+			li.classList = 'list-group-item'	 
+			arr.push(input)
 			console.log(arr);
-			parent.appendChild(input);
+			parent.appendChild(li);
+			document.getElementById('enter').value = ''
+			// input = ''
 		})
 	</script>
 
-</body>
-
-</html>
+{% endblock %}
