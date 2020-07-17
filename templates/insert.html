@@ -2,7 +2,7 @@
 
 {% block head %}
     <title>Insert</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
 	<link rel="stylesheet" href="/static/main.css">	
 {% endblock %}
 
@@ -12,9 +12,20 @@
 	<div ng-app="myApp" ng-controller="myController">
 		<h1 class="htitle">Task Entries</h1>
 		<div class="jumbotron form-section">		
-			<form action="http://localhost:5000/add" method="GET">
-				<input type="text" name="taskname" placeholder="Task Name" autofocus><hr>
-				<input type="text" placeholder="Entry" id="enter" ng-model = "data">&nbsp<button class="btn" type="button" ng-click="addRow()"><i class="fas fa-plus"></i></button><br>
+			<form>
+				<div class="input-group input-group-lg">
+				<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="taskname" id="taskname" placeholder="Task Name" autofocus>
+				</div><hr>
+				
+				<div class="input-group mb-3">
+					<input type="text" id="enter" ng-model = "data" class="form-control" placeholder="Entry" aria-label="Recipient's username"
+						aria-describedby="button-addon2">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button" id="button-addon2"ng-click="addRow()"><i class="fas fa-plus"></i></button>
+					</div>
+				</div>		
+				
+				
 				<table class="table table-sm"> 				
 					<tr ng-repeat="entry in entries">
 						<td><label>{{ '{{$index + 1}}' }}</label></td>	
@@ -22,18 +33,59 @@
 						<td><button ng-click="deleteRecord($index)" class="btn">❌</button></td>
 					</tr>
 				</table>
-				<hr><input type="submit" value="Submit" class="btn btn-outline-info">		
+				<hr><input type="submit" id="submit" value="Submit" class="btn btn-outline-info">		
 			</form>	
 		</div>	
 		<hr style="background-color: whitesmoke;">
 		<a href="/" class="btn btn-link">🏠</a>
+		<p id="para"></p>
 	</div>
 
 	<script>
+		var user = firebase.auth().currentUser;
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				document.getElementById('para').innerHTML = user.displayName + "<br>" + user.email + "<br>Verified:" + user.emailVerified + "<br><img src='" + user.photoURL + "'>";
+			} else {
+				window.alert('User not signed in Now');
+				window.location.replace('/');
+			}
+		});
+	</script>
+	<script>		
+		var arr = []
+		
+		document.getElementById('submit').addEventListener('click',(e)=>{
+			e.preventDefault();
+			if(arr.length===0){
+				alert('Bhai + button to press karo!')
+			}else{
+				var taskname = document.getElementById('taskname').value
+				var data = {
+					'taskname': taskname,
+					'entries': arr
+				}
+				console.log(data);
+				fetch('http://127.0.0.1:5000/add', {
+					method: 'POST', // or 'PUT'
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						console.log('Success:', data);
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+					});
+			}		
+			
+		})
 		var app = angular.module('myApp', []);
 		app.controller('myController', function ($scope) {			
-			$scope.entries = [];
-			var arr=[]
+			$scope.entries = [];		
 
 			$scope.deleteRecord = function (index) {
 				var arrMovie = [];
@@ -60,9 +112,15 @@
 					console.log(arr);
 					document.getElementById('enter').value = null	            
 				}               
-        	};				
+        	};		
+			// $scope.doSubmit = function (){
+			// 	alert('hola');
+			// 	return false;
+			// }		
 			
 		});
+		
+
 	</script>
 	
 {% endblock %}
