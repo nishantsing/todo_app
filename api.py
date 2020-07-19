@@ -7,7 +7,8 @@ firebase = firebase.FirebaseApplication("https://todo-8a912.firebaseio.com/", No
 
 app = flask.Flask(__name__)
 CORS(app)
-app.config["DEBUG"] = True
+# app.config["DEBUG"] = True
+# app.debug = True
 
 def displayAll():
     return firebase.get('/collection',None)
@@ -54,5 +55,5 @@ def getAdd():
         return render_template('insert.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 

@@ -1,0 +1,26 @@
+#hola {
+    width: 30px;
+    height: 30px;
+    float: right;
+    padding-top: 0%;
+    border-radius: 30px;
+}
+/* .p-4{
+    float: right;
+} */
+
+#name {
+    display: inline-block !important;
+}
+
+#signout {
+    float: right;
+    display: inline-block !important;
+}
+
+#removea {
+    float: right;
+    display: inline-block !important;
+    padding-left: 10px;
+    margin-left: 10px;
+}

@@ -5,6 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/static/layout.css">    
+
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -28,14 +31,37 @@
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
     <script src="{{ url_for('static', filename='config.js') }}"></script>
-    <script>
+
+   <script>
         firebase.initializeApp(config);
-        firebase.analytics();
-    </script>
-    
+        firebase.analytics();   
+   </script>
+   
+   
+
     {% block head %} {% endblock %}
 </head>
 <body>
     {% block body %} {% endblock %}
+    <div class="fixed-top">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h6 class="text-white h4" id="name"></h6>
+                <button type="button" id="removea" class="btn btn-danger">Remove Account</button>
+                <button type="button" id="signout" class="btn btn-light">Sign Out</button>
+                &nbsp;
+                
+            </div>
+        </div>
+    <nav class="navbar navbar-light bg-light">
+        
+        <a class="navbar-brand"><i class="fas fa-clipboard-list"></i> Todo App</a>        
+        <span class="navbar-toggler " data-toggle="collapse"        data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" id="pic"></span>
+    </nav>
+    </div>
+    <script src="/static/layout.js"></script>
 </body>
+
+   
 </html>
