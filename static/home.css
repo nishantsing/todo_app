@@ -8,11 +8,12 @@ body{
     display:flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0;
+    padding-top: 10%;
 }
 .new-task{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     padding-right: 20px;
@@ -20,6 +21,10 @@ body{
     zoom: 400%;
 }
 i{
-    position: absolute;
+    position: fixed;
     right:0;
 }
+
+/* .card{
+    margin-right:10px;
+} */

@@ -5,28 +5,64 @@ document.getElementById('submit').addEventListener('click',(e)=>{
     if(arr.length===0){
         alert('Bhai + button to press karo!')
     }else{
-        var taskname = document.getElementById('taskname').value
-        var data = {
-            'taskname': taskname,
-            'entries': arr
-        }
-        console.log(data);
-        fetch('http://127.0.0.1:5000/add', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
+        var taskname = document.getElementById("taskname").value;
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // console.log(user.email); 
+                // console.log(user.uid);
+                var data = {
+                    // "taskname": taskname,
+                    "entries": arr,
+                }; 
+                console.log(data);
+                var database = firebase.database();
+                var ref = database.ref(`/collection/${user.uid}/${taskname}`);
+                console.log("xx");
+                // console.log(ref.push(data))
+                ref.set(data).then(()=>{
+                    console.log("aa");
+                    window.location.replace("/home");
+                })                
+                console.log("bb");
+            } else {
+                window.alert("User not signed in Now");
+                window.location.replace("/");
+            }
+            // window.location.replace("/home");
 
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }		
+        });
+
+
+
+
+
+        
+
+        //  var databse = 
+    }
+    // }else{
+    //     var taskname = document.getElementById('taskname').value
+    //     var data = {
+    //         'taskname': taskname,
+    //         'entries': arr
+    //     }
+    //     console.log(data);
+    //     fetch('http://127.0.0.1:5000/add', {
+    //         method: 'POST', // or 'PUT'
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(data),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             console.log('Success:', data);
+
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error:', error);
+    //         });
+    // }		
     
 })
 var app = angular.module('myApp', []);

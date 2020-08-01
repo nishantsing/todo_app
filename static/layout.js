@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     window.location.replace("/");
   }
 });
-console.log(firebase.auth().currentUser);
+// console.log(firebase.auth().currentUser);
 
 // var user = firebase.auth().currentUser;
 // console.log(user);
