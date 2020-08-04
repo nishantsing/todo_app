@@ -25,6 +25,10 @@ i{
     right:0;
 }
 
+.delEntry{
+    text-decoration: line-through;
+}
+
 /* .card{
     margin-right:10px;
 } */

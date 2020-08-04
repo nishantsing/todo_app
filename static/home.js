@@ -1,25 +1,39 @@
-var taskList = []
-$("#recipeCarousel").carousel({
-  interval: 4000,
-});
+var entryIndex = 0
 
-$(".carousel .carousel-item").each(function () {
-  var minPerSlide = 3;
-  var next = $(this).next();
-  if (!next.length) {
-    next = $(this).siblings(":first");
-  }
-  next.children(":first-child").clone().appendTo($(this));
+function recog(key) {
+  if (confirm('You sure?')){
+    // console.log('coming');
+    console.log(key.innerText)
+    root.innerHTML = null
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // console.log('coming2');
+        console.log(key.innerText)
 
-  for (var i = 0; i < minPerSlide; i++) {
-    next = next.next();
-    if (!next.length) {
-      next = $(this).siblings(":first");
+        var database = firebase.database();
+        var ref = database.ref(`/collection/${user.uid}/${key.innerText}`);
+        ref.remove()
+      }
+    })
+  }  
+}
+
+function entryDel(param) {
+  console.log('aa');
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // console.log('coming2');
+      console.log(param);
+      // var database = firebase.database();
+      // var ref = database.ref(`/collection/${user.uid}/${key.innerText}`);
+      // ref.remove()
     }
+  })
+    
+}
 
-    next.children(":first-child").clone().appendTo($(this));
-  }
-});
+
+
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
@@ -28,7 +42,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     ref.on('value',getData,errData)
 
+    
     function getData(data){
+
+      
+
         for (var key in data.val()) {            
 
           root = document.getElementById('root')
@@ -49,9 +67,10 @@ firebase.auth().onAuthStateChanged(function (user) {
             const taskName = document.createElement('div')
             taskName.className = "card-title text-center"
             console.log(data.val());
-          taskName.innerHTML = `<h4>${key}<button id = "${key}"class = 'btn delbut'><i class='far fa-trash-alt'></i></button></h4>`;
-          taskList.push(key)  
-          card.appendChild(taskName)
+            // console.log(typeof user.uid);
+          taskName.innerHTML = `<h4 id = "${key}">${key}<button onclick='recog(${key})' class = 'btn delbut'><i class='far fa-trash-alt'></i></button></h4>`;
+            // taskList.push(key)  
+            card.appendChild(taskName)
 
             // const cardBody = document.createElement('div')
             // cardBody.className = 'card-body'
@@ -61,12 +80,13 @@ firebase.auth().onAuthStateChanged(function (user) {
             entries.className = 'list-group'
             taskName.appendChild(entries)
 
-            data.val()[key]["entries"].forEach((entry)=>{
+            data.val()[key]["entries"].forEach((entry)=>{                          
                 const li = document.createElement('li')
                 li.className = 'list-group-item'
-                li.innerText = entry
+                // console.log(typeof entry);
+              li.innerHTML = `<div><span>${entry}</span><button onclick='entryDel("${entryIndex}")' class='btn'>X</button></div>`
                 entries.appendChild(li)
-
+              entryIndex+=1  
             })
             // check if the property/key is defined in the object itself, not in parent
             // document.getElementById('task-name').innerHTML = data.val()[key]["taskname"];
@@ -90,12 +110,12 @@ firebase.auth().onAuthStateChanged(function (user) {
     //     console.log('Error!');
     //     console.log(err);
     // })
-    console.log(typeof taskList);
-    console.log(taskList[0]);
+    // console.log(typeof taskList);
+    // console.log(taskList[0]);
 
-    for (var ss of taskList){
-      console.log(ss);
-    }
+    // for (var ss of taskList){
+    //   console.log(ss);
+    // }
 
     // taskList.forEach((task)=>{
     //   console.log(task+'1');
@@ -104,15 +124,16 @@ firebase.auth().onAuthStateChanged(function (user) {
     //   // })
     // }) 
     
-
+     
     
-    
+  
+    // hola('NIsah')
    
+
   } else {
     window.alert("User not signed in Now");
     window.location.replace("/");
   }
-
 
 
 });
