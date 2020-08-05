@@ -1,17 +1,18 @@
 var entryIndex = 0
 
 function recog(key) {
+  console.log(key);
   if (confirm('You sure?')){
     // console.log('coming');
-    console.log(key.innerText)
+    // console.log(key.innerText)
     root.innerHTML = null
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // console.log('coming2');
-        console.log(key.innerText)
+        // console.log(key.innerText)
 
         var database = firebase.database();
-        var ref = database.ref(`/collection/${user.uid}/${key.innerText}`);
+        var ref = database.ref(`/collection/${user.uid}/${key}`);
         ref.remove()
       }
     })
@@ -24,6 +25,7 @@ function entryDel(param) {
     if (user) {
       // console.log('coming2');
       console.log(param);
+      alert('You cannot delete entries...Finish all entries n delete task')
       // var database = firebase.database();
       // var ref = database.ref(`/collection/${user.uid}/${key.innerText}`);
       // ref.remove()
@@ -68,7 +70,7 @@ firebase.auth().onAuthStateChanged(function (user) {
             taskName.className = "card-title text-center"
             console.log(data.val());
             // console.log(typeof user.uid);
-          taskName.innerHTML = `<h4 id = "${key}">${key}<button onclick='recog(${key})' class = 'btn delbut'><i class='far fa-trash-alt'></i></button></h4>`;
+          taskName.innerHTML = `<h4>${key}<button onclick='recog("${key}")' class = 'btn delbut'><i class='far fa-trash-alt'></i></button></h4>`;
             // taskList.push(key)  
             card.appendChild(taskName)
 
