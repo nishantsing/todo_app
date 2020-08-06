@@ -1,5 +1,3 @@
-var entryIndex = 0
-
 function recog(key) {
   console.log(key);
   if (confirm('You sure?')){
@@ -19,16 +17,47 @@ function recog(key) {
   }  
 }
 
-function entryDel(param) {
-  console.log('aa');
+function update(key) {
+  // console.log(key);
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      // console.log('coming2');
-      console.log(param);
-      alert('You cannot delete entries...Finish all entries n delete task')
-      // var database = firebase.database();
-      // var ref = database.ref(`/collection/${user.uid}/${key.innerText}`);
-      // ref.remove()
+      var arr = []
+      var database = firebase.database();
+      var ref = database.ref(`/collection/${user.uid}/${key}/entries`);
+      ref.on('value', getData, errData);
+
+      function getData(data) {
+        for (var ent in data.val()) {
+          // console.log(ent);
+          // console.log(data.val()[ent]);
+          arr.push(data.val()[ent]);
+          // data.val()[key]["entries"]
+        }
+      }
+      console.log(arr);
+
+      function errData(err) {
+        console.log("Error in Update!");
+        console.log(err);
+      }
+      
+      window.location.replace(`/add?var1=${key}&var2=${arr}`)
+    }
+  })
+}
+
+function entryDel(key,ind) {
+  // console.log(entry, key);
+  
+  root.innerHTML = null
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // console.log('inside');
+      // console.log(key);
+      var database = firebase.database();
+      // console.log(`/collection/${ user.uid } / ${ key } / entries / ${ ind }`);
+      var ref = database.ref(`/collection/${user.uid}/${key}/entries/${ind}`);
+      ref.remove()    
     }
   })
     
@@ -62,15 +91,15 @@ firebase.auth().onAuthStateChanged(function (user) {
             card.className = "card mb-4 shadow-sm"
             card.style.width = "300px";
             // card.innerHTML = 'hihi'
-            console.log(card);
+            // console.log(card);
             // var node = document.getElementById("cards")
             col.appendChild(card)
             
             const taskName = document.createElement('div')
             taskName.className = "card-title text-center"
-            console.log(data.val());
-            // console.log(typeof user.uid);
-          taskName.innerHTML = `<h4>${key}<button onclick='recog("${key}")' class = 'btn delbut'><i class='far fa-trash-alt'></i></button></h4>`;
+            // console.log(data.val());
+            // console.log(key);
+          taskName.innerHTML = `<h4>${key}&nbsp&nbsp<button onclick='recog("${key}")' class = 'btn btn-danger delbut'><i class='far fa-trash-alt'></i></button>&nbsp&nbsp<button class="btn btn-primary" onclick='update("${key}")'><i class="far fa-edit"></i></button></h4>`;
             // taskList.push(key)  
             card.appendChild(taskName)
 
@@ -81,15 +110,19 @@ firebase.auth().onAuthStateChanged(function (user) {
             const entries = document.createElement('ul')
             entries.className = 'list-group'
             taskName.appendChild(entries)
-
-            data.val()[key]["entries"].forEach((entry)=>{                          
+          // console.log(data.val()[key]["entries"]);
+          for (ind in data.val()[key]["entries"]) {
+            // console.log(data.val()[key]);
+            // data.val()[key]["entries"].forEach((entry)=>{                          
                 const li = document.createElement('li')
                 li.className = 'list-group-item'
-                // console.log(typeof entry);
-              li.innerHTML = `<div><span>${entry}</span><button onclick='entryDel("${entryIndex}")' class='btn'>X</button></div>`
+                // console.log(entry);
+                // console.log(key);
+                
+            li.innerHTML = `<h6>${data.val()[key]["entries"][ind]}&nbsp&nbsp<button onclick='entryDel("${key}","${ind}")' class='btn btn-outline-danger'>X</button></h6>`
                 entries.appendChild(li)
-              entryIndex+=1  
-            })
+               
+            // })
             // check if the property/key is defined in the object itself, not in parent
             // document.getElementById('task-name').innerHTML = data.val()[key]["taskname"];
             // data.val()[key]["entries"].forEach()
@@ -97,6 +130,7 @@ firebase.auth().onAuthStateChanged(function (user) {
             // if (data.val().hasOwnProperty(key)) {
             //     console.log(data.val()[key]['entries']);
             // }
+          }
         }
 
     }

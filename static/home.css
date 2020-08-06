@@ -18,17 +18,10 @@ body{
     right: 0;
     padding-right: 20px;
     /* opacity: 20%; */
-    zoom: 400%;
+    zoom: 200%;
 }
 i{
     position: fixed;
     right:0;
 }
 
-.delEntry{
-    text-decoration: line-through;
-}
-
-/* .card{
-    margin-right:10px;
-} */

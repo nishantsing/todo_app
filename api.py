@@ -30,29 +30,16 @@ def getDisplayAll():
 
 @app.route('/add',methods=['POST','GET'])
 def getAdd():
-    if request.method == 'POST':
-        data = request.json
-        return jsonify(data)
-        # taskname = request.form.get('taskname', type=str)
-        # entryname = request.form.get('entryname', type=str)
-        # user = 'user1'
+    taskName1 = None
+    entries2 = None
 
-        data = [{'entryname': entryname}]
-        print(data)
-        # result=firebase.post('/collection'+'/'+user+'/'+taskname, data)
-        # result = firebase.put('/collection/user1/cricket/-MCCbNQg5MSrq8e3oDUx', 'entryname', 'get bhola')
-        result=firebase.post('/collection/user1/cricket', data)
-        print(jsonify(result))
+    for somevar in request.args: 
+        if somevar == 'var1':
+            taskName1 = request.args[somevar]
+        if somevar == 'var2':
+            entries2 = request.args[somevar]
 
-        if taskname is not None and entryname is not None:
-            if (result['name'] is not None):
-                return redirect('http://127.0.0.1:5000/display-all')
-            else:
-                return "Error - Not inserted"
-        else:
-            return render_template('insert.html')
-    else:
-        return render_template('insert.html')
+    return render_template('insert.html', taskName1=taskName1, entries2=entries2)
 
 if __name__ == '__main__':
     app.run(debug=True)

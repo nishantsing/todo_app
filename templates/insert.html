@@ -9,12 +9,15 @@
 
 
 {% block body %}
+	<!-- <h1></h1> -->
+	<h1 id="ent">{{ entries2 }}</h1>
+	
 	<div ng-app="myApp" ng-controller="myController">
 		<h1 class="htitle">Task Entries</h1>
 		<div class="jumbotron form-section">		
 			<form>
 				<div class="input-group input-group-lg">
-				<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="taskname" id="taskname" placeholder="Task Name" autofocus>
+				<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="taskname" id="taskname" placeholder="Task Name" value="{{ taskName1 }}" autofocus>
 				</div><hr>
 				
 				<div class="input-group mb-3">

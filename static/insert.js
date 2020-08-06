@@ -1,4 +1,12 @@
 var arr = []
+const ent = document.getElementById('ent').innerHTML;
+document.getElementById('ent').style.display = 'none';
+// console.log(ent)
+var a = ent.split(',')
+
+// console.log(a);
+
+
 
 document.getElementById('submit').addEventListener('click',(e)=>{
     e.preventDefault();
@@ -66,8 +74,22 @@ document.getElementById('submit').addEventListener('click',(e)=>{
     
 })
 var app = angular.module('myApp', []);
-app.controller('myController', function ($scope) {			
-    $scope.entries = [];		
+app.controller('myController', function ($scope) {
+    console.log(a);		
+    
+    // $scope.movieArray =
+    //     [
+    //         { 'name': 'Total Eclipse', 'director': 'Agniezka Hollan' },
+    //         { 'name': 'My Left Foot', 'director': 'Jim Sheridan' },
+    //         { 'name': 'Forest Gump', 'director': 'Robert Zemeckis' }
+    //     ];
+
+    $scope.entries = [];
+    for(el of a){
+        cur = {}
+        cur.data = el;
+        $scope.entries.push(cur);
+    }		
 
     $scope.deleteRecord = function (index) {
         var arrMovie = [];
