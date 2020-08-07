@@ -1,9 +1,8 @@
 var arr = []
+
 const ent = document.getElementById('ent').innerHTML;
 document.getElementById('ent').style.display = 'none';
 // console.log(ent)
-var a = ent.split(',')
-
 // console.log(a);
 
 
@@ -25,13 +24,13 @@ document.getElementById('submit').addEventListener('click',(e)=>{
                 console.log(data);
                 var database = firebase.database();
                 var ref = database.ref(`/collection/${user.uid}/${taskname}`);
-                console.log("xx");
+                // console.log("xx");
                 // console.log(ref.push(data))
                 ref.set(data).then(()=>{
                     console.log("aa");
                     window.location.replace("/home");
                 })                
-                console.log("bb");
+                // console.log("bb");
             } else {
                 window.alert("User not signed in Now");
                 window.location.replace("/");
@@ -75,8 +74,6 @@ document.getElementById('submit').addEventListener('click',(e)=>{
 })
 var app = angular.module('myApp', []);
 app.controller('myController', function ($scope) {
-    console.log(a);		
-    
     // $scope.movieArray =
     //     [
     //         { 'name': 'Total Eclipse', 'director': 'Agniezka Hollan' },
@@ -85,11 +82,18 @@ app.controller('myController', function ($scope) {
     //     ];
 
     $scope.entries = [];
-    for(el of a){
-        cur = {}
-        cur.data = el;
-        $scope.entries.push(cur);
-    }		
+
+    if(ent!==""){
+        var a = ent.split(',')
+        console.log(a);		        
+
+        for(el of a){
+            cur = {}
+            cur.data = el;
+            $scope.entries.push(cur);
+            arr.push(el);
+        }
+    }  		
 
     $scope.deleteRecord = function (index) {
         var arrMovie = [];
@@ -99,8 +103,8 @@ app.controller('myController', function ($scope) {
             arr.splice(index,1);
         }              				
         $scope.entries = arrMovie;     
-        console.log($scope.entries)
-        console.log(arr)       
+        // console.log($scope.entries)
+        // console.log(arr)       
     };					
 
     $scope.addRow = function () {	
@@ -110,17 +114,19 @@ app.controller('myController', function ($scope) {
             var input = document.getElementById('enter').value
             entry.data = input;
             $scope.entries.push(entry);
-            console.log($scope.entries)	                
+            // console.log($scope.entries)	                
             
             arr.push(input)
-            console.log(arr);
+            // console.log(arr);
             document.getElementById('enter').value = null	            
         }               
     };		
     // $scope.doSubmit = function (){
     // 	alert('hola');
     // 	return false;
-    // }		
+    // }
+    console.log($scope.entries);
+    console.log(arr);		
     
 });
 
