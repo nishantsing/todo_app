@@ -167,7 +167,8 @@ firebase.auth().onAuthStateChanged(function (user) {
    
 
   } else {
-    window.alert("User not signed in Now");
+    // window.alert("User not signed in Now");
+    console.log("User not signed in Now");
     window.location.replace("/");
   }
 

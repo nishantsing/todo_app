@@ -8,9 +8,9 @@
 
 .form-section{
     text-align: center;
-    border-radius: 30px;
-    margin-left: 300px;
-    margin-right: 300px;
+    /* border-radius: 30px; */
+    margin-left: 20%;
+    margin-right: 20%;
     box-shadow: 5px 10px #888888;
 }
 
@@ -24,4 +24,14 @@ body{
     background-color: transparent;
     /* text-align: center; */
     padding: 80px;
+}
+
+@media only screen and (max-width: 800px) {
+    .form-section{
+        /* text-align: center; */
+        /* border-radius: 30px; */
+        margin-left: 0%;
+        margin-right: 0%; 
+        /* box-shadow: 5px 10px black; */
+    }
   }

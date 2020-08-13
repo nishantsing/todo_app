@@ -32,7 +32,8 @@ document.getElementById('submit').addEventListener('click',(e)=>{
                 })                
                 // console.log("bb");
             } else {
-                window.alert("User not signed in Now");
+                // window.alert("User not signed in Now");
+                console.log("User not signed in Now");
                 window.location.replace("/");
             }
             // window.location.replace("/home");

@@ -15,7 +15,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         document.getElementById("name").innerHTML = user.email.split('@')[0];
     }  
   } else {
-    window.alert("User not signed in Now");
+    // window.alert("User not signed in Now");
+    console.log("User not signed in Now");
     window.location.replace("/");
   }
 });
@@ -47,7 +48,10 @@ document.getElementById('removea').addEventListener('click', function (e) {
 
         // user.reauthenticateWithCredential(credential).then(function() {
         user.delete().then(function () {
-            window.alert('deleted');
+            var database = firebase.database();
+            var ref = database.ref(`/collection/${user.uid}`);
+            ref.remove()
+            window.alert('Account & Data Deleted Successfully');
             // User deleted.
         }).catch(function (error) {
             window.alert('Please Signin again & Remove');	// An error happened.
