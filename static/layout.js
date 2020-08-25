@@ -1,7 +1,7 @@
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     // console.log(firebase.auth().currentUser);
-    console.log(user.photoURL);
+    // console.log(user.photoURL);
     if(user.photoURL !== null){
         document.getElementById("pic").innerHTML = `<img id="hola" src = ${user.photoURL}>`;
     }else{

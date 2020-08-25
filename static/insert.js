@@ -19,15 +19,15 @@ document.getElementById('submit').addEventListener('click',(e)=>{
                 // console.log(user.uid);
                 var data = {
                     // "taskname": taskname,
-                    "entries": arr,
+                    "entries": arr
                 }; 
-                console.log(data);
+                // console.log(data);
                 var database = firebase.database();
-                var ref = database.ref(`/collection/${user.uid}/${taskname}`);
+                var ref = database.ref(`/collection/${user.uid}/Tasks/${taskname}`);
                 // console.log("xx");
                 // console.log(ref.push(data))
                 ref.set(data).then(()=>{
-                    console.log("aa");
+                    // console.log("aa");
                     window.location.replace("/home");
                 })                
                 // console.log("bb");
@@ -126,8 +126,8 @@ app.controller('myController', function ($scope) {
     // 	alert('hola');
     // 	return false;
     // }
-    console.log($scope.entries);
-    console.log(arr);		
+    // console.log($scope.entries);
+    // console.log(arr);		
     
 });
 
