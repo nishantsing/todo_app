@@ -89,7 +89,7 @@ app.controller('myController', function ($scope) {
 
     if(ent!==""){
         var a = ent.split(',')
-        console.log(a);		        
+        // console.log(a);		        
 
         for(el of a){
             cur = {}
@@ -107,8 +107,8 @@ app.controller('myController', function ($scope) {
             arr.splice(index,1);
         }              				
         $scope.entries = arrMovie;     
-        console.log($scope.entries)
-        console.log(arr)       
+        // console.log($scope.entries)
+        // console.log(arr)       
     };					
 
     $scope.addRow = function () {	
@@ -118,10 +118,10 @@ app.controller('myController', function ($scope) {
             var input = document.getElementById('enter').value
             entry.data = input;
             $scope.entries.push(entry);
-            console.log($scope.entries)	                
+            // console.log($scope.entries)	                
             
             arr.push(input)
-            console.log(arr);
+            // console.log(arr);
             document.getElementById('enter').value = null	            
         }               
     };		
@@ -154,8 +154,8 @@ app.controller('myController', function ($scope) {
                     entry.data = curval;
                     $scope.entries.push(entry);                    
                 });
-                console.log($scope.entries);
-                console.log(arr);
+                // console.log($scope.entries);
+                // console.log(arr);
             }
         });
     });
