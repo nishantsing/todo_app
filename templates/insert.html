@@ -29,9 +29,9 @@
 				</div>		
 				
 				
-				<table class="table table-sm"> 				
-					<tr ng-repeat="entry in entries">
-						<td><label>{{ '{{$index + 1}}' }}</label></td>	
+				<table class="table table-sm" id="tblLocations"> 				
+					<tr ng-repeat="entry in entries" class="listitemClass">
+						<!-- <td><label>{{ '{{$index + 1}}' }}</label></td>	 -->
 						<td><label>{{ '{{entry.data}}' }}</label></td>				
 						<td><button ng-click="deleteRecord($index)" class="btn">❌</button></td>
 					</tr>

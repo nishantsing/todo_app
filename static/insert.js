@@ -1,4 +1,5 @@
 var arr = []
+var entry = [];
 
 const ent = document.getElementById('ent').innerHTML;
 document.getElementById('ent').style.display = 'none';
@@ -9,10 +10,12 @@ document.getElementById('ent').style.display = 'none';
 
 document.getElementById('submit').addEventListener('click',(e)=>{
     e.preventDefault();
-    if(arr.length===0){
-        alert('Bhai + button to press karo!')
+    var taskname = document.getElementById("taskname").value;
+    if(taskname===''){
+        alert('Enter task name & insert entries please!')
+    }else if(arr.length===0){
+        alert('Bhai + button to press karo to insert entries!') 
     }else{
-        var taskname = document.getElementById("taskname").value;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // console.log(user.email); 
@@ -104,21 +107,21 @@ app.controller('myController', function ($scope) {
             arr.splice(index,1);
         }              				
         $scope.entries = arrMovie;     
-        // console.log($scope.entries)
-        // console.log(arr)       
+        console.log($scope.entries)
+        console.log(arr)       
     };					
 
     $scope.addRow = function () {	
         if(document.getElementById('enter').value !== ''){
-            var entry = [];
+            entry = [];
 
             var input = document.getElementById('enter').value
             entry.data = input;
             $scope.entries.push(entry);
-            // console.log($scope.entries)	                
+            console.log($scope.entries)	                
             
             arr.push(input)
-            // console.log(arr);
+            console.log(arr);
             document.getElementById('enter').value = null	            
         }               
     };		
@@ -128,7 +131,34 @@ app.controller('myController', function ($scope) {
     // }
     // console.log($scope.entries);
     // console.log(arr);		
-    
+
+    $(function () {
+        $("#tblLocations").sortable({
+            items: 'tr',
+            cursor: 'pointer',
+            axis: 'y',
+            dropOnEmpty: false,
+            start: function (e, ui) {
+                ui.item.addClass("selected");
+            },
+            stop: function (e, ui) {
+                arr = []
+                $scope.entries = []
+                ui.item.removeClass("selected");
+                $('.listitemClass').each(function (index) {
+                    curval = $(this)[0].innerText;
+                    curval = curval.split(curval[curval.length-2])[0];
+                    arr.push(curval)
+                    
+                    entry = [];
+                    entry.data = curval;
+                    $scope.entries.push(entry);                    
+                });
+                console.log($scope.entries);
+                console.log(arr);
+            }
+        });
+    });
 });
 
 
