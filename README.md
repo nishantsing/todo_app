@@ -13,6 +13,6 @@
 	* Click Submit
 
 ## Create __Todos & Notes__ with ease and store them to access later.
-## Here  *__[yetodo](http://yetodo.herokuapp.com)__*
+## Try It Now  [yetodo](http://yetodo.herokuapp.com)
 
 #### Thank You...
