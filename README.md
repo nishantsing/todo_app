@@ -1,18 +1,6 @@
 # Todo & Notes
 
-### Steps to Create Todo
-	* Login
-	* Click on bottom right icon
-	* Add TodoName and the Todos
-	* Click Submit
+## Effortlessly Generate __To-Do's and Notes__, and Conveniently Store for Future Access.
+### Have a look [yetodo](https://www.linkedin.com/posts/yashkaranje_todolist-webdevelopment-firebase-activity-6718202890843947008-w_Q5?utm_source=share&utm_medium=member_desktop)
 
-### Steps to Create Notes
-	* Login
-	* Click on bottom left icon
-	* Add NoteName and the Notes
-	* Click Submit
-
-## Create __Todos & Notes__ with ease and store them to access later.
-## Try It Now  [yetodo](http://yetodo.herokuapp.com)
-
-#### Thank You...
+> Due to the discontinuation of free Heroku hosting, this application has been taken down.
