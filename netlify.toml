@@ -1,0 +1,6 @@
+[build]
+  publish = "src" # Change to your publish directory
+  command = "pip install -r requirements.txt && python app.py" # Adjust the build command
+
+[build.environment]
+  PYTHON_VERSION = "3.6" # Specify the required Python version
