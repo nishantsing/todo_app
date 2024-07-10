@@ -1,5 +1,5 @@
 [build]
-  command = "python3 -m pip install -r requirements.txt && python app.py" # Adjust the build command
+  command = "python --version && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py && pip install -r requirements.txt && python app.py" # Adjust the build command
 
 [build.environment]
   PYTHON_VERSION = "3.6" # Specify the required Python version
